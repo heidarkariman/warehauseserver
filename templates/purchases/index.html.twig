@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Purchases index{% endblock %}
+
+{% block body %}
+    <h1>Purchases index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Unit_price</th>
+                <th>Purchace_date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchase in purchases %}
+            <tr>
+                <td>{{ purchase.id }}</td>
+                <td>{{ purchase.quantity }}</td>
+                <td>{{ purchase.unitPrice }}</td>
+                <td>{{ purchase.purchaceDate ? purchase.purchaceDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_purchases_show', {'id': purchase.id}) }}">show</a>
+                    <a href="{{ path('app_purchases_edit', {'id': purchase.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_purchases_new') }}">Create new</a>
+{% endblock %}

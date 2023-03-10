@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vendors index{% endblock %}
+
+{% block body %}
+    <h1>Vendors index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone_number</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vendor in vendors %}
+            <tr>
+                <td>{{ vendor.id }}</td>
+                <td>{{ vendor.name }}</td>
+                <td>{{ vendor.address }}</td>
+                <td>{{ vendor.phoneNumber }}</td>
+                <td>
+                    <a href="{{ path('app_vendors_show', {'id': vendor.id}) }}">show</a>
+                    <a href="{{ path('app_vendors_edit', {'id': vendor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_vendors_new') }}">Create new</a>
+{% endblock %}
